@@ -21,6 +21,6 @@ public class Food {
     @Column(nullable = false, length = 20)
     private String name;
 
-//    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
-//    private List<SelectFood> selectFoodList = new ArrayList<>();
+    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL)
+    private List<SelectFood> selectFoodList = new ArrayList<>();
 }

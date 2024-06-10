@@ -32,8 +32,8 @@ public class Inquiry {
     private String response;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @OneToMany(mappedBy = "inquiry", cascade = CascadeType.ALL)
     private List<InquiryImage> inquiryImageList = new ArrayList<>();

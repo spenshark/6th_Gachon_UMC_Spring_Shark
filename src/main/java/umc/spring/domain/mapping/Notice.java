@@ -3,7 +3,7 @@ package umc.spring.domain.mapping;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.Receive;
-import umc.spring.domain.User;
+import umc.spring.domain.Member;
 import umc.spring.domain.common.BaseEntity;
 
 @Entity
@@ -26,8 +26,8 @@ public class Notice extends BaseEntity {
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receive_id")

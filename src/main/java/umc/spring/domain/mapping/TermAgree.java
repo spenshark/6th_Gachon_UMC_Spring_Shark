@@ -2,7 +2,7 @@ package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.User;
+import umc.spring.domain.Member;
 import umc.spring.domain.Term;
 import umc.spring.domain.common.BaseEntity;
 
@@ -25,7 +25,7 @@ public class TermAgree extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private User user;
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "term_id")
