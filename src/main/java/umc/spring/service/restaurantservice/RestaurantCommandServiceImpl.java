@@ -15,7 +15,7 @@ import umc.spring.web.dto.RestaurantRequestDto;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class RestaurantServiceImpl implements RestaurantService {
+public class RestaurantCommandServiceImpl implements RestaurantCommandService {
 
     private final RestaurantRepository restaurantRepository;
     private final RegionRepository regionRepository;

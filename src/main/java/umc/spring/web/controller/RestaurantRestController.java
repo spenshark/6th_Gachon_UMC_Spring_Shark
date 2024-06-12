@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.RestaurantConverter;
 import umc.spring.domain.Restaurant;
-import umc.spring.service.restaurantservice.RestaurantService;
+import umc.spring.service.restaurantservice.RestaurantCommandService;
 import umc.spring.web.dto.RestaurantRequestDto;
 import umc.spring.web.dto.RestaurantResponseDto;
 
@@ -18,11 +18,11 @@ import umc.spring.web.dto.RestaurantResponseDto;
 @RequestMapping("/restaurants")
 public class RestaurantRestController {
 
-    private final RestaurantService restaurantService;
+    private final RestaurantCommandService restaurantCommandService;
 
     @PostMapping("/")
     public ApiResponse<RestaurantResponseDto.JoinResultDTO> join(@RequestBody @Valid RestaurantRequestDto.joinDto request) {
-        Restaurant newRestaurant = restaurantService.joinRestaurant(request);
+        Restaurant newRestaurant = restaurantCommandService.joinRestaurant(request);
         return ApiResponse.onSuccess(RestaurantConverter.joinResultDTO(newRestaurant));
     }
 }
