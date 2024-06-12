@@ -23,6 +23,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@Table(name = "member")
 public class Member extends BaseEntity {
 
     @Id
@@ -42,9 +43,6 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 50)
     private String address;
-
-    @Column(nullable = false, length = 40)
-    private String specAddress;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10)")

@@ -15,6 +15,8 @@ public class MemberRequestDto {
         @NotBlank
         String name;
         @NotNull
+        String nickname;
+        @NotNull
         Integer gender;
         @NotNull
         Integer birthYear;
@@ -22,10 +24,10 @@ public class MemberRequestDto {
         Integer birthMonth;
         @NotNull
         Integer birthDay;
+        @NotNull
+        String phone;
         @Size(min = 5, max = 12)
         String address;
-        @Size(min = 5, max = 12)
-        String specAddress;
         @ExistCategories
         List<Long> selectFoodList;
     }
