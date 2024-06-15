@@ -1,8 +1,6 @@
 package umc.spring.service.reviewservice;
 
-import umc.spring.domain.Restaurant;
 import umc.spring.domain.Review;
-import umc.spring.web.dto.RestaurantRequestDto;
 import umc.spring.web.dto.ReviewRequestDto;
 
 public interface ReviewService {

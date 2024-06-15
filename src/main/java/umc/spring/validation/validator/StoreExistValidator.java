@@ -5,19 +5,17 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.domain.Restaurant;
-import umc.spring.repository.FoodRepository;
-import umc.spring.service.restaurantservice.RestaurantQueryService;
+import umc.spring.domain.Store;
+import umc.spring.service.storeservice.StoreQueryService;
 import umc.spring.validation.annotation.ExistCategories;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class RestaurantExistValidator implements ConstraintValidator<ExistCategories, Long> {
+public class StoreExistValidator implements ConstraintValidator<ExistCategories, Long> {
 
-    private final RestaurantQueryService restaurantQueryService;
+    private final StoreQueryService storeQueryService;
 
     @Override
     public void initialize(ExistCategories constraintAnnotation) {
@@ -26,11 +24,11 @@ public class RestaurantExistValidator implements ConstraintValidator<ExistCatego
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        Optional<Restaurant> target = restaurantQueryService.findRestaurant(value);
+        Optional<Store> target = storeQueryService.findStore(value);
 
         if (target.isEmpty()){
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.RESTAURANT_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.toString()).addConstraintViolation();
             return false;
         }
         return true;
