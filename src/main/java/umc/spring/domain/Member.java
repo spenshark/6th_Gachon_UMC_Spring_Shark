@@ -51,6 +51,7 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String phone;
 
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT NULL")
     private boolean phoneCheck;
 
     @Enumerated(EnumType.STRING)
