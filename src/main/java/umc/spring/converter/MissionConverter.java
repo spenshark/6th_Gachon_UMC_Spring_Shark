@@ -3,7 +3,9 @@ package umc.spring.converter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
+import umc.spring.domain.Store;
 import umc.spring.domain.mapping.SelectMission;
+import umc.spring.web.dto.MissionRequestDto;
 import umc.spring.web.dto.MissionResponseDto;
 import umc.spring.web.dto.ReviewRequestDto;
 import umc.spring.web.dto.ReviewResponseDto;
@@ -11,6 +13,22 @@ import umc.spring.web.dto.ReviewResponseDto;
 import java.time.LocalDateTime;
 
 public class MissionConverter {
+
+    public static MissionResponseDto.ResultDTO toResultDTO(Mission mission) {
+        return MissionResponseDto.ResultDTO.builder()
+                .missionId(mission.getId())
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static Mission toMission(MissionRequestDto.JoinDTO request, Store store){
+        return Mission.builder()
+                .name(request.getName())
+                .point(request.getPoint())
+                .deadline(request.getDeadline())
+                .store(store)
+                .build();
+    }
 
     public static MissionResponseDto.ResultDTO toResultDTO(SelectMission selectMission){
         return MissionResponseDto.ResultDTO.builder()
@@ -26,5 +44,7 @@ public class MissionConverter {
                 .mission(mission)
                 .build();
     }
+
+
 
 }

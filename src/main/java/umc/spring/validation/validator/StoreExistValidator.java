@@ -8,17 +8,18 @@ import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.domain.Store;
 import umc.spring.service.storeservice.StoreQueryService;
 import umc.spring.validation.annotation.ExistCategories;
+import umc.spring.validation.annotation.ExistStore;
 
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class StoreExistValidator implements ConstraintValidator<ExistCategories, Long> {
+public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
 
     private final StoreQueryService storeQueryService;
 
     @Override
-    public void initialize(ExistCategories constraintAnnotation) {
+    public void initialize(ExistStore constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
