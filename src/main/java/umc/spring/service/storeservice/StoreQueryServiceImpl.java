@@ -1,4 +1,4 @@
-package umc.spring.service.Storeservice;
+package umc.spring.service.storeservice;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

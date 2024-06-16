@@ -35,11 +35,12 @@ public class MemberConverter {
 
         return Member.builder()
                 .address(request.getAddress())
-                .phone(request.getPhone())
                 .gender(gender)
                 .name(request.getName())
                 .nickname(request.getNickname())
                 .selectFoodList(new ArrayList<>())
                 .build();
     }
+
+
 }

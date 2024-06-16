@@ -10,11 +10,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
+import umc.spring.converter.MissionConverter;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Store;
 import umc.spring.service.storeservice.StoreCommandService;
 import umc.spring.service.storeservice.StoreQueryService;
 import umc.spring.validation.annotation.ExistStore;
+import umc.spring.web.dto.MissionRequestDto;
+import umc.spring.web.dto.MissionResponseDto;
 import umc.spring.web.dto.StoreRequestDto;
 import umc.spring.web.dto.StoreResponseDto;
 
@@ -30,6 +34,12 @@ public class StoreRestController {
     public ApiResponse<StoreResponseDto.JoinResultDTO> join(@RequestBody @Valid StoreRequestDto.joinDto request) {
         Store newStore = storeCommandService.joinStore(request);
         return ApiResponse.onSuccess(StoreConverter.joinResultDTO(newStore));
+    }
+
+    @PostMapping("/{storeId}/missions")
+    public ApiResponse<MissionResponseDto.ResultDTO> joinMission(@RequestBody @Valid MissionRequestDto.JoinDTO request, @PathVariable Long storeId) {
+        Mission newMission = storeCommandService.joinMission(request, storeId);
+        return ApiResponse.onSuccess(MissionConverter.toResultDTO(newMission));
     }
 
     @GetMapping("/{storeId}/reviews")
