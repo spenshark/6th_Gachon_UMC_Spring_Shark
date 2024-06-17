@@ -4,6 +4,7 @@ import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
+import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.SelectMission;
 import umc.spring.web.dto.MissionRequestDto;
 import umc.spring.web.dto.MissionResponseDto;
@@ -42,9 +43,15 @@ public class MissionConverter {
         return SelectMission.builder()
                 .member(member)
                 .mission(mission)
+                .status(MissionStatus.PROGRESS)
                 .build();
     }
 
-
-
+    public static SelectMission toChangeMissionStatus(SelectMission selectMission) {
+        return SelectMission.builder()
+                .member(selectMission.getMember())
+                .mission(selectMission.getMission())
+                .status(MissionStatus.SUCCESS)
+                .build();
+    }
 }

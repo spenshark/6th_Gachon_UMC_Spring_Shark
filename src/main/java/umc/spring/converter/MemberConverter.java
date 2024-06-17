@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.enums.Gender;
+import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.SelectMission;
 import umc.spring.web.dto.MemberRequestDto;
 import umc.spring.web.dto.MemberResponseDto;

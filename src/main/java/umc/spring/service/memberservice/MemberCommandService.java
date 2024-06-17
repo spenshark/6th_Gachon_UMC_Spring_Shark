@@ -8,4 +8,6 @@ public interface MemberCommandService {
     Member joinMember(MemberRequestDto.joinDto request);
 
     SelectMission selectMission(Long missionId, Long memberId);
+
+    void changeMissionStatus(Long memberId, Long missionId);
 }

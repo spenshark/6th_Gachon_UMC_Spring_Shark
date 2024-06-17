@@ -45,7 +45,7 @@ public class MemberQueryServiceImpl implements MemberQueryService{
 
     @Override
     public Optional<Review> findReview(Long id) {
-        return reviewRepository.findByMember(memberRepository.findById(id));
+        return reviewRepository.findAllByMember(memberRepository.findById(id));
     }
 
     @Override
@@ -58,8 +58,9 @@ public class MemberQueryServiceImpl implements MemberQueryService{
     }
 
     @Override
-    public Optional<SelectMission> findProgressMission(Long id) {
-        return selectMissionRepository.findAllByStatus(MissionStatus.PROGRESS);
+    public Optional<SelectMission> findMission(Long id) {
+        Optional<Member> member = memberRepository.findById(id);
+        return selectMissionRepository.findAllByMember(member);
     }
 
 

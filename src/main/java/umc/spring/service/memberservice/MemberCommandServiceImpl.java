@@ -9,9 +9,12 @@ import umc.spring.apiPayload.exception.handler.FoodHandler;
 import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MissionConverter;
 import umc.spring.converter.SelectFoodConverter;
+import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Food;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
+import umc.spring.domain.Review;
+import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.SelectFood;
 import umc.spring.domain.mapping.SelectMission;
 import umc.spring.repository.MemberRepository;
@@ -21,6 +24,7 @@ import umc.spring.repository.SelectMissionRepository;
 import umc.spring.web.dto.MemberRequestDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,5 +64,17 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         SelectMission selectMission = MissionConverter.toMission(mission, member);
 
         return selectMissionRepository.save(selectMission);
+    }
+
+    @Override
+    @Transactional
+    public void changeMissionStatus(Long missionId, Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
+        Mission mission = missionRepository.findById(missionId).orElseThrow(() -> new GeneralException(ErrorStatus.MISSION_NOT_FOUND));
+
+        SelectMission selectMission = selectMissionRepository.findByMemberAndMission(member, mission);
+
+        selectMission.setStatus(MissionStatus.SUCCESS);
+        selectMissionRepository.save(selectMission);
     }
 }

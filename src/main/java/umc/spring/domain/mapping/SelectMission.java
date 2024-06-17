@@ -10,6 +10,7 @@ import umc.spring.domain.enums.MissionStatus;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class SelectMission extends BaseEntity {
