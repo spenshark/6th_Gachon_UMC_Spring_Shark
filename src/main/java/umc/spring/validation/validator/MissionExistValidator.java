@@ -3,12 +3,15 @@ package umc.spring.validation.validator;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.util.Optionals;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.SelectMission;
+import umc.spring.repository.MissionRepository;
 import umc.spring.repository.SelectMissionRepository;
 import umc.spring.service.memberservice.MemberQueryService;
 import umc.spring.service.storeservice.StoreQueryService;
@@ -21,8 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MissionExistValidator implements ConstraintValidator<ExistMission, Long> {
 
-    private final MemberQueryService memberQueryService;
-    private final SelectMissionRepository selectMissionRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     public void initialize(ExistMission constraintAnnotation) {
@@ -31,7 +33,7 @@ public class MissionExistValidator implements ConstraintValidator<ExistMission, 
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        Optional<SelectMission> target = selectMissionRepository.findAllByStatus(MissionStatus.PROGRESS);
+        Optional<Mission> target = missionRepository.findById(value);
 
         if (target.isEmpty()){
             context.disableDefaultConstraintViolation();

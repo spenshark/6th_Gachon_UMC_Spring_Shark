@@ -18,5 +18,5 @@ public interface MemberQueryService {
 
     Page<SelectMission> getMissionList(Long memberId, Integer page);
 
-    Optional<SelectMission> findProgressMission(Long id);
+    Optional<SelectMission> findMission(Long id);
 }

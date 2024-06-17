@@ -16,10 +16,7 @@ import umc.spring.domain.Member;
 import umc.spring.domain.mapping.SelectMission;
 import umc.spring.service.memberservice.MemberCommandService;
 import umc.spring.service.memberservice.MemberQueryService;
-import umc.spring.validation.annotation.ExistMember;
-import umc.spring.validation.annotation.ExistMission;
-import umc.spring.validation.annotation.ExistReview;
-import umc.spring.validation.annotation.ExistStore;
+import umc.spring.validation.annotation.*;
 import umc.spring.web.dto.MemberRequestDto;
 import umc.spring.web.dto.MemberResponseDto;
 import umc.spring.web.dto.MissionResponseDto;
@@ -58,7 +55,7 @@ public class MemberRestController {
     @Parameters({
             @Parameter(name = "memberId", description = "멤버의 아이디, path variable 입니다.")
     })
-    public ApiResponse<StoreResponseDto.ReviewPreViewListDTO> getReviewList(@ExistReview @PathVariable(name = "memberId") Long memberId, @RequestParam(name = "page") Integer page) {
+    public ApiResponse<StoreResponseDto.ReviewPreViewListDTO> getReviewList(@ExistMember @PathVariable(name = "memberId") Long memberId, @CheckPage @RequestParam(name = "page") Integer page) {
         memberQueryService.getReviewList(memberId, page);
         return null;
     }
@@ -74,8 +71,24 @@ public class MemberRestController {
     @Parameters({
             @Parameter(name = "memberId", description = "멤버의 아이디, path variable 입니다.")
     })
-    public ApiResponse<MemberResponseDto.MissionPreViewListDTO> getMissionList(@ExistMission @PathVariable(name = "memberId") Long memberId, @RequestParam(name = "page") Integer page) {
+    public ApiResponse<MemberResponseDto.MissionPreViewListDTO> getMissionList(@ExistMember @PathVariable(name = "memberId") Long memberId, @CheckPage @RequestParam(name = "page") Integer page) {
         memberQueryService.getMissionList(memberId, page);
+        return null;
+    }
+
+    @PostMapping("/{missionId}/success")
+    @Operation(summary = "진행중인 미션 진행 완료로 바꾸기 API", description = "내가 진행중인 미션의 상태를 진행 완료로 바꾸는 API입니다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200", description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "access 토큰 만료", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 모양이 이상함", content = @Content(schema = @Schema(implementation = ApiResponse.class)))
+    })
+    @Parameters({
+            @Parameter(name = "missionId", description = "미션의 아이디, path variable 입니다.")
+    })
+    public ApiResponse<MemberResponseDto.MissionPreViewListDTO> getMissionList(@ExistMission @PathVariable(name = "missionId") Long missionId, @ExistMember @RequestParam Long memberId) {
+        memberCommandService.changeMissionStatus(memberId, missionId);
         return null;
     }
 }

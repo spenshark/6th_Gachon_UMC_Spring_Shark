@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReviewExistValidator implements ConstraintValidator<ExistReview, Long> {
 
-    private final StoreQueryService storeQueryService;
     private final MemberQueryService memberQueryService;
 
     @Override

@@ -17,6 +17,7 @@ import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 import umc.spring.service.storeservice.StoreCommandService;
 import umc.spring.service.storeservice.StoreQueryService;
+import umc.spring.validation.annotation.CheckPage;
 import umc.spring.validation.annotation.ExistStore;
 import umc.spring.web.dto.MissionRequestDto;
 import umc.spring.web.dto.MissionResponseDto;
@@ -54,7 +55,7 @@ public class StoreRestController {
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다.")
     })
-    public ApiResponse<StoreResponseDto.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page) {
+    public ApiResponse<StoreResponseDto.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId ,@CheckPage @RequestParam(name = "page") Integer page) {
         storeQueryService.getReviewList(storeId, page);
         return null;
     }
@@ -70,7 +71,7 @@ public class StoreRestController {
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다.")
     })
-    public ApiResponse<StoreResponseDto.ReviewPreViewListDTO> getMissionList(@ExistStore @PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page) {
+    public ApiResponse<StoreResponseDto.ReviewPreViewListDTO> getMissionList(@ExistStore @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page) {
         storeQueryService.getMissionList(storeId, page);
         return null;
     }
