@@ -48,18 +48,13 @@ public class Member extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(10)")
     private Gender gender;
 
-    @Column(nullable = false, length = 20)
-    private String phone;
-
-    @Column(columnDefinition = "VARCHAR(15) DEFAULT NULL")
-    private boolean phoneCheck;
-
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
     private UserStatus status;
 
     private LocalDate inactive;
 
+    @ColumnDefault("0")
     private Integer successMission;
 
     @ColumnDefault("0")

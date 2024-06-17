@@ -22,6 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final StoreRepository storeRepository;
 
     @Override
+    @Transactional
     public Review createReview(ReviewRequestDto.joinDto request, Long memberId, Long storeId) {
 
 

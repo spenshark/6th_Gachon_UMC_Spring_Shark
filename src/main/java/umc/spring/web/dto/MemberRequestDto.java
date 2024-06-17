@@ -24,9 +24,7 @@ public class MemberRequestDto {
         Integer birthMonth;
         @NotNull
         Integer birthDay;
-        @NotNull
-        String phone;
-        @Size(min = 5, max = 12)
+        @Size(min = 5, max = 20)
         String address;
         @ExistCategories
         List<Long> selectFoodList;
